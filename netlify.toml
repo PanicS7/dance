@@ -1,0 +1,5 @@
+[Settings]
+  ID = "nuxt-firebase-starter"
+
+[build]
+  publish = "dist"
