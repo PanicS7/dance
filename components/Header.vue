@@ -1,12 +1,9 @@
 <template>
   <header class="flex flex-row justify-between py-5 items-center">
     <nuxt-link to="/" class="leading-tight font-bold text-blue-600 text-2xl"
-      >Starter</nuxt-link
+      >Dance</nuxt-link
     >
     <div class="flex flex-sm items-center">
-      <NuxtLink to="/about" class="text-gray-600 text-sm hover:text-blue-600"
-        >About</NuxtLink
-      >
       <AccountDropdown v-if="$store.state.user" class="ml-8" />
       <nuxt-link
         to="/login"
