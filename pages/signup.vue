@@ -12,10 +12,10 @@
           >Name</label
         >
         <input
-          class="border w-full px-2 py-2 rounded-md"
-          type="text"
           id="displayName"
           v-model="name"
+          class="border w-full px-2 py-2 rounded-md"
+          type="text"
         />
       </div>
 
@@ -24,10 +24,10 @@
           >Email</label
         >
         <input
-          class="border w-full px-2 py-2 rounded-md"
-          type="text"
           id="email"
           v-model="email"
+          class="border w-full px-2 py-2 rounded-md"
+          type="text"
         />
       </div>
 
@@ -36,10 +36,10 @@
           >Password</label
         >
         <input
-          class="border w-full px-2 py-2 rounded-md"
-          type="password"
           id="password"
           v-model="password"
+          class="border w-full px-2 py-2 rounded-md"
+          type="password"
         />
       </div>
 
@@ -48,34 +48,32 @@
       >
         Sign Up
       </button>
-      <Error v-if="error" v-bind:error='error'/>
+      <Error v-if="error" :error="error" />
     </form>
     <section class="w-full pt-4 text-sm text-gray-700 text-center">
       Already have an account?
-      <nuxt-link to="/login" class="text-blue-600 hover:text-blue-900"
-        >Log in</nuxt-link>
+      <nuxt-link to="/login" class="text-blue-600 hover:text-blue-900">
+        Log in
+      </nuxt-link>
     </section>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase/app'
-import auth from "firebase/auth";
-import Logo from '~/components/Logo.vue'
 import Error from '~/components/Error.vue'
 
 export default {
   components: {
-    Logo,
-    Error
+    Error,
   },
 
-  data: function () {
+  data() {
     return {
       email: '',
       password: '',
       name: '',
-      error: null
+      error: null,
     }
   },
 
@@ -85,7 +83,7 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((res) => {
-          res.user.sendEmailVerification();
+          res.user.sendEmailVerification()
           res.user
             .updateProfile({
               displayName: this.name,

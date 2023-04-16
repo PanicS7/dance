@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import { auth } from '~/plugins/firebase.js'
 import 'firebase/storage'
@@ -19,7 +18,7 @@ const store = () => {
 
       isAuthenticated(state) {
         return !!state.user
-      }
+      },
     },
 
     mutations: {
@@ -29,42 +28,51 @@ const store = () => {
     },
 
     actions: {
-      signUp({}, { email, password }) {
+      signUp({ state }, { email, password }) {
         return auth.createUserWithEmailAndPassword(email, password)
       },
 
-      signInWithEmail({}, { email, password }) {
+      signInWithEmail({ state }, { email, password }) {
         return auth.signInWithEmailAndPassword(email, password)
       },
 
       signOut() {
         return auth.signOut()
       },
-      updateUserName({state}, displayName) {
-        state.user.updateProfile({ displayName }).then(() => {
-          // Update successful.
-        }, error => {
-          alert(error)
-        })
+      updateUserName({ state }, displayName) {
+        state.user.updateProfile({ displayName }).then(
+          () => {
+            // Update successful.
+          },
+          (error) => {
+            alert(error)
+          }
+        )
       },
-      updatePhotoURL({state}, photoURL) {
-        state.user.updateProfile({ photoURL }).then(() => {
-          // Update successful.
-        }, error => {
-          alert(error)
-        })
+      updatePhotoURL({ state }, photoURL) {
+        state.user.updateProfile({ photoURL }).then(
+          () => {
+            // Update successful.
+          },
+          (error) => {
+            alert(error)
+          }
+        )
       },
-      profilePic({state}, payload) {
+      profilePic({ state }, payload) {
         state.user.photoURL = payload
       },
-      updateUserEmail({state}, email) {
-        state.user.updateEmail(email).then(() => {
-          // Update successful.
-        }, error => {
-          alert(error)
-        })
+      updateUserEmail({ state }, email) {
+        state.user.updateEmail(email).then(
+          () => {
+            // Update successful.
+          },
+          (error) => {
+            alert(error)
+          }
+        )
       },
-    }
+    },
   })
 }
 

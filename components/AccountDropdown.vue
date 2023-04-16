@@ -1,17 +1,22 @@
 <template>
   <div>
-    <div class="relative" :class="{shown: state}">
+    <div class="relative" :class="{ shown: state }">
       <!-- If you have a profile pic, use that -->
-      <button v-if="user.photoURL"
+      <button
+        v-if="user.photoURL"
         class="rounded-full outline-none focus:outline-none bg-blue-600 w-8 h-8 flex items-center justify-center"
         style="transition:all .15s ease font-normal p-3 rounded outline-none focus:outline-none capitalize w-full"
         type="button"
         @click.prevent="toggleDropdown"
       >
-        <img :src="user.photoURL" class="w-full h-full rounded-full object-cover">
+        <img
+          :src="user.photoURL"
+          class="w-full h-full rounded-full object-cover"
+        />
       </button>
       <!-- If you have a name and no profile pic, use that -->
-      <button v-else-if="user.displayName"
+      <button
+        v-else-if="user.displayName"
         class="text-white uppercase text-sm p-3 ring-4 rounded-full outline-none focus:outline-none bg-blue-600 w-8 h-8 flex items-center justify-center"
         style="transition:all .15s ease font-normal p-3 rounded outline-none focus:outline-none capitalize w-full"
         type="button"
@@ -20,7 +25,8 @@
         {{ user.displayName[0] }}
       </button>
       <!-- If you don't have a name or pic, use your email -->
-      <button v-else
+      <button
+        v-else
         class="text-white uppercase text-sm p-3 ring-4 rounded-full outline-none focus:outline-none bg-blue-600 w-8 h-8 flex items-center justify-center"
         style="transition:all .15s ease font-normal p-3 rounded outline-none focus:outline-none capitalize w-full"
         type="button"
@@ -29,9 +35,9 @@
         {{ user.email[0] }}
       </button>
       <div
+        v-show="state"
         class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1 absolute right-0"
         style="min-width: 12rem"
-        v-show="state"
       >
         <a
           href="/account"
@@ -49,17 +55,19 @@
               clip-rule="evenodd"
             />
           </svg>
-          <span class="text-xs w-full inline-block opacity-50">Logged in as</span>
+          <span class="text-xs w-full inline-block opacity-50"
+            >Logged in as</span
+          >
           <span class="block">{{ user.displayName }}</span>
         </a>
         <div
           class="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25"
         ></div>
         <a
+          v-if="user"
           href="#"
           class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap hover:bg-blue-600 hover:text-white bg-transparent text-gray-800"
           @click="signOut"
-          v-if="user"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +95,7 @@ export default {
   name: 'Dropdown',
   data() {
     return {
-      state: false
+      state: false,
     }
   },
   computed: {
@@ -95,30 +103,30 @@ export default {
       user: 'user',
     }),
   },
+  mounted() {
+    document.addEventListener('click', this.close)
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.close)
+  },
   methods: {
-    toggleDropdown (e) {
+    toggleDropdown(e) {
       this.state = !this.state
     },
-    close (e) {
+    close(e) {
       if (!this.$el.contains(e.target)) {
         this.state = false
       }
     },
-    signOut: function (err) {
+    signOut() {
       this.$store
-      .dispatch('signOut')
-      .catch((err) => {
-        alert(err.message)
-      })
-      .then(() => this.$router.push('/login'))
+        .dispatch('signOut')
+        .catch((err) => {
+          alert(err.message)
+        })
+        .then(() => this.$router.push('/login'))
     },
   },
-  mounted () {
-    document.addEventListener('click', this.close)
-  },
-  beforeDestroy () {
-    document.removeEventListener('click',this.close)
-  }
 }
 </script>
 

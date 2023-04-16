@@ -6,7 +6,7 @@
     <p
       class="mx-auto text-left text-base md:text-lg pt-8 md:w-7/12 lg:w-6/12 text-gray-700"
     >
-      Join us and find dancing events you like 
+      Join us and find dancing events you like
     </p>
     <p>
       <a
@@ -29,16 +29,6 @@
     </p>
   </div>
 </template>
-
-<script>
-import Logo from '~/components/Logo.vue'
-
-export default {
-  components: {
-    Logo,
-  },
-}
-</script>
 
 <style lang="scss">
 h1 {

@@ -1,6 +1,8 @@
 <template>
   <div class="w-full lg:grid lg:grid-cols-4 lg:gap-10">
-    <ActionNav class="lg:col-span-1 lg:flex lg:flex-col lg:items-end lg:justify-start lg:pt-10 lg:border-r-2 lg:pr-5"/>
+    <ActionNav
+      class="lg:col-span-1 lg:flex lg:flex-col lg:items-end lg:justify-start lg:pt-10 lg:border-r-2 lg:pr-5"
+    />
     <section class="lg:col-span-3">
       <h1 class="text-4xl text-blue-900 font-bold">Account Details</h1>
       <form class="w-full sm:w-4/5 md:w-3/5" @submit.prevent="saveProfile">
@@ -24,8 +26,8 @@
             </span>
             <!-- Hidden img for preview -->
             <img
-              class="h-full min-w-full rounded-full object-cover absolute z-0"
               id="preview"
+              class="h-full min-w-full rounded-full object-cover absolute z-0"
             />
             <!-- Show if user has profile img -->
             <img
@@ -50,16 +52,16 @@
             </div>
           </div>
         </div>
-        <input type="file" @change="chooseFile" class="hidden" ref="file" />
+        <input ref="file" type="file" class="hidden" @change="chooseFile" />
         <div class="mb-4">
           <label class="block mb-2 text-gray-800 text-sm" for="name"
             >Name</label
           >
           <input
-            class="border w-full px-2 py-2 rounded-md"
-            type="text"
             id="name"
             v-model="displayName"
+            class="border w-full px-2 py-2 rounded-md"
+            type="text"
           />
         </div>
         <div class="mb-4">
@@ -67,10 +69,10 @@
             >Email</label
           >
           <input
-            class="border w-full px-2 py-2 rounded-md"
-            type="text"
             id="email"
             v-model="email"
+            class="border w-full px-2 py-2 rounded-md"
+            type="text"
           />
         </div>
         <button
@@ -93,9 +95,10 @@ import firebase from 'firebase/app'
 import { mapGetters, mapActions } from 'vuex'
 import ActionNav from '../../components/ActionNav.vue'
 
-var previewFile = ''
+let previewFile = ''
 
 export default {
+  components: { ActionNav },
   data() {
     return {
       displayName: '',
@@ -118,29 +121,29 @@ export default {
   methods: {
     ...mapActions(['updateUserName', 'updateUserEmail', 'updatePhotoURL']),
     chooseFile(event) {
-      var reader = new FileReader()
+      const reader = new FileReader()
       reader.onload = function (e) {
-        let output = document.getElementById('preview')
+        const output = document.getElementById('preview')
         output.src = reader.result
       }
       // Show preview thumbnail
       if (event.target.files[0]) {
-        window.file = event.target.files[0]
-        reader.readAsDataURL(file)
-        previewFile = file
+        window.File = event.target.files[0]
+        reader.readAsDataURL(File)
+        previewFile = File
       }
     },
     async uploadFile() {
       if (previewFile !== '') {
-        var user = firebase.auth().currentUser
+        const user = firebase.auth().currentUser
         // Set firebase placement
-        var uploadSpot = firebase
+        const uploadSpot = firebase
           .storage()
           .ref('users/' + user.uid + '/profilePic/' + 'avatar.jpg')
         // Upload firebase
-        var uploadPic = await uploadSpot.put(file)
+        const uploadPic = await uploadSpot.put(File)
         // Get back firebase url
-        var downloadURL = await uploadPic.ref.getDownloadURL()
+        const downloadURL = await uploadPic.ref.getDownloadURL()
         this.photoURL = downloadURL
         // Updating profile pic
         this.updatePhotoURL(this.photoURL)
@@ -173,19 +176,18 @@ export default {
       }, 1000)
     },
     seeUser() {
-      var user = firebase.auth().currentUser
+      const user = firebase.auth().currentUser
       if (user != null) {
         user.providerData.forEach(function (profile) {
-          console.log('Sign-in provider: ' + profile.providerId)
-          console.log('  Provider-specific UID: ' + profile.uid)
-          console.log('  Name: ' + profile.displayName)
-          console.log('  Email: ' + profile.email)
-          console.log('  Photo URL: ' + profile.photoURL)
+          // console.log('Sign-in provider: ' + profile.providerId)
+          // console.log('  Provider-specific UID: ' + profile.uid)
+          // console.log('  Name: ' + profile.displayName)
+          // console.log('  Email: ' + profile.email)
+          // console.log('  Photo URL: ' + profile.photoURL)
         })
       }
     },
   },
-  components: { ActionNav },
 }
 </script>
 

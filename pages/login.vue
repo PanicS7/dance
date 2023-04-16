@@ -12,10 +12,10 @@
           >Email</label
         >
         <input
-          class="border w-full px-2 py-2 rounded-md"
-          type="text"
           id="email"
           v-model="email"
+          class="border w-full px-2 py-2 rounded-md"
+          type="text"
         />
       </div>
 
@@ -24,10 +24,10 @@
           >Password</label
         >
         <input
-          class="border w-full px-2 py-2 rounded-md"
-          type="password"
           id="password"
           v-model="password"
+          class="border w-full px-2 py-2 rounded-md"
+          type="password"
         />
       </div>
 
@@ -37,8 +37,7 @@
         Continue
       </button>
 
-      <Error v-if="error" v-bind:error='error'/>
-
+      <Error v-if="error" :error="error" />
     </form>
     <section class="w-full pt-4 text-sm text-gray-700 text-center">
       Forgot your password?
@@ -59,20 +58,20 @@
 import Error from '~/components/Error.vue'
 
 export default {
-  name: 'login',
+  name: 'Login',
 
   components: {
-    Error
+    Error,
   },
-  data: function () {
+  data() {
     return {
       email: '',
       password: '',
-      error: null
+      error: null,
     }
   },
   methods: {
-    userSignIn: function (err) {
+    userSignIn() {
       this.$store
         .dispatch('signInWithEmail', {
           email: this.email,
