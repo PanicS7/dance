@@ -30,11 +30,14 @@
   </div>
 </template>
 
-<style lang="scss">
+<style>
 h1 {
   line-height: 3rem;
   font-size: 3rem;
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
+  h1 {
     font-size: 5rem;
     line-height: 5.9rem;
   }

@@ -16,9 +16,7 @@
     "@nuxtjs/pwa": "^3.0.2",
     "core-js": "^3.6.5",
     "firebase": "^8.1.2",
-    "node-sass": "^5.0.0",
     "nuxt": "^2.14.6",
-    "sass-loader": "^10.1.0",
     "tailwindcss-aspect-ratio": "^3.0.0"
   },
   "devDependencies": {

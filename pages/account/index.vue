@@ -191,20 +191,16 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 .draft {
   height: 24rem;
 }
-.avatar {
-  .edit-icon {
-    bottom: -2px;
-    right: -2px;
-  }
-  &:hover {
-    .edit-icon {
-      border-color: #2c5282;
-    }
-  }
+.avatar .edit-icon {
+  bottom: -2px;
+  right: -2px;
+}
+.avatar:hover .edit-icon {
+  border-color: #2c5282;
 }
 .disabled {
   background: #ccc;
