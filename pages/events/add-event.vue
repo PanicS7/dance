@@ -68,7 +68,7 @@ export default {
           city: this.fields[1].value,
           country: this.fields[2].value,
           organizer: this.fields[3].value,
-          date: this.fields[4].value,
+          date: firebase.firestore.Timestamp.fromDate(new Date(this.fields[4].value)),
         })
         .then(() => {
           this.success = true

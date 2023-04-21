@@ -4,19 +4,20 @@
     <section>
       <header>
         <h2>Events</h2>
-        <nuxt-link
-          :to="'/events/add-event'"
-          class="hover:underline"
-        >
-        Add event
+        <nuxt-link :to="'/events/add-event'" class="hover:underline">
+          Add event
         </nuxt-link>
       </header>
       <div v-for="event in events" :key="event.id">
         <h2>{{ event.title }}</h2>
         <p>{{ 'Organizer: ' + event.organizer }}</p>
         <p>{{ event.country + ' | ' + event.city }}</p>
-        <p>{{ new Date(event.date.seconds * 1000).toDateString('en-US') }}</p>
-        <br/>
+        <p>
+          {{
+            new Date(event.date.seconds * 1000).toDateString('en-US')
+          }}
+        </p>
+        <br />
       </div>
     </section>
   </div>
