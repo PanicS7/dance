@@ -1,21 +1,22 @@
 <template>
-  <div>
+  <div class="w-full lg:grid lg:grid-cols-4 lg:gap-10">
     <ActionNav
       class="lg:col-span-1 lg:flex lg:flex-col lg:items-end lg:justify-start lg:pt-10 lg:border-r-2 lg:pr-5"
     />
-    <section>
-      <h2>Add Event</h2>
-      <div>
+    <section class="lg:col-span-3">
+      <h2 class="text-2xl font-bold text-center mb-10">Add Event</h2>
+      <div class="container flex flex-col gap-3 w-9/12 m-auto">
         <input
           v-for="(field, index) in fields"
           :key="index"
           v-model="field.value"
           :type="field.type"
           :placeholder="field.name != 'date' && 'Enter ' + field.name"
+          class="px-2"
         />
-        <button type="submit" @click="addEvent">Submit</button>
-        <p v-if="success">Event successfuly added</p>
-        <p v-if="error">{{ error }}</p>
+        <button type="submit" @click="addEvent" class="inline-block text-md text-white bg-blue-600 hover:bg-blue-800 mt-6 px-5 py-2 rounded-full w-32">Submit</button>
+        <p v-if="success" class="text-green-700">Event successfuly added</p>
+        <p v-if="error" class="text-rose-700">{{ error }}</p>
       </div>
     </section>
   </div>
