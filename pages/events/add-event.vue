@@ -1,6 +1,8 @@
 <template>
   <div>
-    <ActionNav />
+    <ActionNav
+      class="lg:col-span-1 lg:flex lg:flex-col lg:items-end lg:justify-start lg:pt-10 lg:border-r-2 lg:pr-5"
+    />
     <section>
       <h2>Add Event</h2>
       <div>
@@ -68,7 +70,9 @@ export default {
           city: this.fields[1].value,
           country: this.fields[2].value,
           organizer: this.fields[3].value,
-          date: firebase.firestore.Timestamp.fromDate(new Date(this.fields[4].value)),
+          date: firebase.firestore.Timestamp.fromDate(
+            new Date(this.fields[4].value)
+          ),
         })
         .then(() => {
           this.success = true

@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <ActionNav />
-    <section>
+  <div class="w-full lg:grid lg:grid-cols-4 lg:gap-10">
+    <ActionNav
+      class="lg:col-span-1 lg:flex lg:flex-col lg:items-end lg:justify-start lg:pt-10 lg:border-r-2 lg:pr-5"
+    />
+    <section class="lg:col-span-3">
       <header>
         <h2>Events</h2>
         <nuxt-link :to="'/events/add-event'" class="hover:underline">
@@ -12,11 +14,7 @@
         <h2>{{ event.title }}</h2>
         <p>{{ 'Organizer: ' + event.organizer }}</p>
         <p>{{ event.country + ' | ' + event.city }}</p>
-        <p>
-          {{
-            new Date(event.date.seconds * 1000).toDateString('en-US')
-          }}
-        </p>
+        <p>{{ new Date(event.date.seconds * 1000).toDateString('en-US') }}</p>
         <br />
       </div>
     </section>
