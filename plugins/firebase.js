@@ -12,6 +12,7 @@ function initFirebase() {
     messagingSenderId: '782961572123',
     appId: '1:782961572123:web:00b90034acf4eef84bbbbe',
     measurementId: 'G-CLG6PEB51P',
+    storageBucket: 'gs://dance-169a7.appspot.com',
   })
   return new Promise((resolve, reject) => {
     firebase

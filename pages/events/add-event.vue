@@ -14,7 +14,14 @@
           :placeholder="field.name != 'date' && 'Enter ' + field.name"
           class="px-2"
         />
-        <button type="submit" @click="addEvent" class="inline-block text-md text-white bg-blue-600 hover:bg-blue-800 mt-6 px-5 py-2 rounded-full w-32">Submit</button>
+        <input type="file" />
+        <button
+          type="submit"
+          @click="addEvent"
+          class="inline-block text-md text-white bg-blue-600 hover:bg-blue-800 mt-6 px-5 py-2 rounded-full w-32"
+        >
+          Submit
+        </button>
         <p v-if="success" class="text-green-700">Event successfuly added</p>
         <p v-if="error" class="text-rose-700">{{ error }}</p>
       </div>
@@ -60,10 +67,14 @@ export default {
       ],
       error: false,
       success: false,
+      file: '',
     }
   },
   methods: {
-    addEvent() {
+    async addEvent() {
+      // handle image upload
+      await this.uploadFile(this.fields[0].value)
+
       const db = firebase.firestore()
       db.collection('events')
         .add({
@@ -74,6 +85,7 @@ export default {
           date: firebase.firestore.Timestamp.fromDate(
             new Date(this.fields[4].value)
           ),
+          image: this.file,
         })
         .then(() => {
           this.success = true
@@ -83,6 +95,19 @@ export default {
         .catch((error) => {
           this.error = error.message
         })
+    },
+    async uploadFile(eventUid) {
+      const user = firebase.auth().currentUser
+      // Set firebase placement
+      if (user) {
+        const uploadSpot = firebase
+          .storage()
+          .ref('images/events/' + eventUid + '/event.jpg')
+        // Upload firebase
+        const uploadPic = await uploadSpot.put(File)
+        // Get back firebase url
+        this.file = await uploadPic.ref.getDownloadURL()
+      }
     },
   },
 }
