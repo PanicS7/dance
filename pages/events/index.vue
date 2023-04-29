@@ -14,14 +14,16 @@
         </nuxt-link>
       </header>
       <hr />
-      <div v-for="event in events" :key="event.id" class="mt-8">
+      <div v-for="event in events" :key="event.id" class="mt-8 flex gap-3">
         <div>
-          <img :src="event.image" />
+          <img :src="event.image" class="w-xs max-w-xs"/>
         </div>
-        <h2>{{ event.title }}</h2>
-        <p>{{ 'Organizer: ' + event.organizer }}</p>
-        <p>{{ event.country + ' | ' + event.city }}</p>
-        <p>{{ new Date(event.date.seconds * 1000).toDateString('en-US') }}</p>
+        <div>
+          <h2 class="text-2xl font-bold">{{ event.title }}</h2>
+          <p>{{ 'Organizer: ' + event.organizer }}</p>
+          <p>{{ event.country + ' | ' + event.city }}</p>
+          <p>{{ new Date(event.date.seconds * 1000).toDateString('en-US') }}</p>  
+        </div>
         <br />
       </div>
     </section>
