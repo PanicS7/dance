@@ -4,13 +4,20 @@
       class="lg:col-span-1 lg:flex lg:flex-col lg:items-end lg:justify-start lg:pt-10 lg:border-r-2 lg:pr-5"
     />
     <section class="lg:col-span-3">
-      <header>
-        <h2>Events</h2>
-        <nuxt-link :to="'/events/add-event'" class="hover:underline">
+      <header class="flex justify-between mb-8">
+        <h2 class="text-2xl font-bold">Events</h2>
+        <nuxt-link
+          :to="'/events/add-event'"
+          class="text-md text-white bg-blue-600 hover:bg-blue-800 px-5 py-2 rounded-full"
+        >
           Add event
         </nuxt-link>
       </header>
-      <div v-for="event in events" :key="event.id">
+      <hr />
+      <div v-for="event in events" :key="event.id" class="mt-8">
+        <div>
+          <img :src="event.image" />
+        </div>
         <h2>{{ event.title }}</h2>
         <p>{{ 'Organizer: ' + event.organizer }}</p>
         <p>{{ event.country + ' | ' + event.city }}</p>

@@ -14,11 +14,11 @@
           :placeholder="field.name != 'date' && 'Enter ' + field.name"
           class="px-2"
         />
-        <input type="file" />
+        <input id="imageFile" type="file" />
         <button
           type="submit"
-          @click="addEvent"
           class="inline-block text-md text-white bg-blue-600 hover:bg-blue-800 mt-6 px-5 py-2 rounded-full w-32"
+          @click="addEvent"
         >
           Submit
         </button>
@@ -104,7 +104,9 @@ export default {
           .storage()
           .ref('images/events/' + eventUid + '/event.jpg')
         // Upload firebase
-        const uploadPic = await uploadSpot.put(File)
+        const uploadPic = await uploadSpot.put(
+          document.querySelector('#imageFile').files[0]
+        )
         // Get back firebase url
         this.file = await uploadPic.ref.getDownloadURL()
       }
