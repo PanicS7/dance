@@ -15,7 +15,7 @@
 export default {
   data() {
     return {
-      navItems: ['events', 'account', 'settings'],
+      navItems: ['events', 'account'],
     }
   },
   computed: {
