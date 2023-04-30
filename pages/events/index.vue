@@ -4,7 +4,7 @@
       class="lg:col-span-1 lg:flex lg:flex-col lg:items-end lg:justify-start lg:pt-10 lg:border-r-2 lg:pr-5"
     />
     <section class="lg:col-span-3">
-      <header class="flex justify-between mb-8">
+      <header class="flex justify-between mb-8 my-3">
         <h2 class="text-2xl font-bold">Events</h2>
         <nuxt-link
           :to="'/events/add-event'"
@@ -14,9 +14,13 @@
         </nuxt-link>
       </header>
       <hr />
-      <div v-for="event in events" :key="event.id" class="mt-8 flex gap-3">
+      <div
+        v-for="event in events"
+        :key="event.id"
+        class="mt-8 flex gap-3 flex-col lg:flex-row"
+      >
         <div>
-          <img :src="event.image" class="w-sm max-w-sm" />
+          <img :src="event.image" class="w-sm lg:max-w-sm" />
         </div>
         <div>
           <h2 class="text-2xl font-bold flex items-center">
