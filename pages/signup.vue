@@ -61,6 +61,7 @@
 
 <script>
 import firebase from 'firebase/app'
+import 'firebase/firestore'
 import Error from '~/components/Error.vue'
 
 export default {
@@ -83,14 +84,19 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((res) => {
-          res.user.sendEmailVerification()
           res.user
             .updateProfile({
               displayName: this.name,
             })
             .then(() => {
-              // this.$router.back()
-              // Sending to account page for the demo
+              // create bookmark for user
+              const db = firebase.firestore()
+              const user = firebase.auth().currentUser
+              db.collection("users").doc(user.uid).set({
+                bookmark: []
+              });
+
+              // Sending to account page
               this.$router.push('/account')
             })
         })
