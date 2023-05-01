@@ -92,9 +92,9 @@ export default {
               // create bookmark for user
               const db = firebase.firestore()
               const user = firebase.auth().currentUser
-              db.collection("users").doc(user.uid).set({
-                bookmark: []
-              });
+              db.collection('users').doc(user.uid).set({
+                bookmark: [],
+              })
 
               // Sending to account page
               this.$router.push('/account')
